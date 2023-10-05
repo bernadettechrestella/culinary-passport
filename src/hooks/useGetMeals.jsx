@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getIngredients, getMealsByLetter } from "../services/meals.services"
+import { getIngredients, getMealsById, getMealsByLetter } from "../services/meals.services"
+import { useParams } from "react-router-dom"
 
 export const useGetMeals = () => {
     const [meals, setMeals] = useState([])
