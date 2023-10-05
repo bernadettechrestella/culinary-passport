@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom'
 const DashboardPages = () => {
     const {meals, getMealsByFirstLetter, ingredients} = useGetMeals()
     const [buttonActive, setButtonActive] = useState("m")
-    const [startIndex, setStartIndex] = useState(0);
+    const [startIndexIngredient, setStartIndexIngredient] = useState(0);
+    const [startIndexMeals, setStartIndexMeals] = useState(0);
     const navigate = useNavigate()
 
     const handleLetterClick = (letter) => {
@@ -19,13 +20,37 @@ const DashboardPages = () => {
         navigate(`/meals/${idMeal}`)
     }
 
-        const handleClickNext = () => {
-            setStartIndex(startIndex + 10)
+    const handleClickPrevIng = () => {
+        if (startIndexIngredient === 0) {
+            setStartIndexIngredient(ingredients.length - (ingredients.length % 10));
+        } else {
+            setStartIndexIngredient(Math.max(startIndexIngredient - 10, 0));
         }
+      };
+      
+    const handleClickNextIng = () => {
+        if (startIndexIngredient === (ingredients.length - (ingredients.length % 10))) {
+            setStartIndexIngredient(0);
+        } else {
+            setStartIndexIngredient(startIndexIngredient + 10);
+        }
+    };
 
-        const handleClickPrev = () => {
-            setStartIndex(startIndex - 10)
+    const handleClickPrevMeals = () => {
+        if (startIndexMeals === 0) {
+            setStartIndexMeals(meals.length - (meals.length % 10));
+        } else {
+            setStartIndexMeals(Math.max(startIndexMeals - 10, 0));
         }
+      };
+      
+    const handleClickNextMeals = () => {
+        if (startIndexMeals === (meals.length - (meals.length % 10))) {
+            setStartIndexMeals(0);
+        } else {
+            setStartIndexMeals(startIndexMeals + 10);
+        }
+    };
 
   return (
     <div>
@@ -45,8 +70,8 @@ const DashboardPages = () => {
                 </div>
             </div>
         </div>
-        <div name='recipes' className='w-full min-h-screen laptop:px-20 px-10 py-10'>
-            <div className='text-center mb-10'>
+        <div name='recipes' className='w-full min-h-screen py-10'>
+            <div className='text-center mb-10 laptop:px-20 px-10 '>
                 <p className='laptop:text-5xl text-4xl font-bold text-green-600'>Find Your
                     <span className='text-orange-500'> Perfect Meal</span>
                 </p>
@@ -79,15 +104,19 @@ const DashboardPages = () => {
                 <button onClick={() => {handleLetterClick("y"); setButtonActive("y")}} className={`rounded-full ${buttonActive === "y" ? 'bg-green-500 text-white' : 'bg-green-300 text-green-500'} font-semibold w-8 text-lg`}>Y</button>
                 <button onClick={() => {handleLetterClick("z"); setButtonActive("z")}} className={`rounded-full ${buttonActive === "z" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>Z</button>
             </div>
-            <div>
-                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3'>
-                    {Array.isArray(meals) && meals.slice(0,10).map((meal) => (
-                        <div key={meal.idMeal} className='relative cursor-pointer' onClick={() => handleMealsClick(meal.idMeal)}>
-                            <img src={meal.strMealThumb} alt="" className='rounded-3xl'/>
-                            <p className='absolute bottom-0 left-0 right-0 laptop:px-4 px-2 laptop:py-2 py-1 bg-gray-500 bg-opacity-80 text-center rounded-b-3xl text-white laptop:text-lg text-sm'>{meal.strMeal}</p>
-                        </div>
-                    ))}
-                </div>
+            <div className={`${meals != null ? 'flex px-6' : 'px-14'}`}>
+                {meals && meals.length > 10 ? <BsFillArrowLeftCircleFill onClick={handleClickPrevMeals} size={100} className='my-auto text-green-500 cursor-pointer'/> : null}
+                {meals == null ? <div className='text-center text-2xl font-semibold text-orange-500'>No Result Found</div> : 
+                    <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4'>
+                        {Array.isArray(meals) && meals.slice(startIndexMeals, startIndexMeals + 10).map((meal) => (
+                            <div key={meal.idMeal} className='relative cursor-pointer' onClick={() => handleMealsClick(meal.idMeal)}>
+                                <img src={meal.strMealThumb} alt="" className='rounded-3xl'/>
+                                <p className='absolute bottom-0 left-0 right-0 laptop:px-4 px-2 laptop:py-2 py-1 bg-gray-500 bg-opacity-80 text-center rounded-b-3xl text-white laptop:text-lg text-sm'>{meal.strMeal}</p>
+                            </div>
+                        ))}
+                    </div>
+                }
+                {meals && meals.length > 10 ? <BsFillArrowRightCircleFill onClick={handleClickPrevMeals} size={100} className='my-auto text-orange-500 cursor-pointer'/> : null}
             </div>
         </div>
         <div name='ingredients' className='w-full min-h-screen py-10'>
@@ -97,16 +126,16 @@ const DashboardPages = () => {
                 </p>
             </div>
             <div className='flex px-6'>
-                <BsFillArrowLeftCircleFill onClick={handleClickPrev} size={100} className='my-auto text-green-500 cursor-pointer'/>
+                <BsFillArrowLeftCircleFill onClick={handleClickPrevIng} size={100} className='my-auto text-green-500 cursor-pointer'/>
                 <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4'>
-                    {Array.isArray(ingredients) && ingredients.slice(startIndex, startIndex + 10).map((ingredient) => (
+                    {Array.isArray(ingredients) && ingredients.slice(startIndexIngredient, startIndexIngredient + 10).map((ingredient) => (
                         <div key={ingredient.idIngredient} className='relative'>
                             <img src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`} alt="" className='rounded-3xl'/>
                             <p className='absolute bottom-0 left-0 right-0 px-2 laptop:px-4 py-1 laptop:py-2 bg-gray-500 bg-opacity-80 text-center rounded-3xl text-white laptop:text-lg text-sm'>{ingredient.strIngredient}</p>
                         </div>
                     ))}
                 </div>
-                <BsFillArrowRightCircleFill onClick={handleClickNext} size={100} className='my-auto text-orange-500 cursor-pointer'/>
+                <BsFillArrowRightCircleFill onClick={handleClickNextIng} size={100} className='my-auto text-orange-500 cursor-pointer'/>
             </div>
         </div>
     </div>
