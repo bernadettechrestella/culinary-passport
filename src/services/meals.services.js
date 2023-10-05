@@ -11,16 +11,16 @@ export const getMealsByLetter = async (letter, callback) => {
   }
 };
 
-// export const getMealsByIngredient = async (ingredient, callback) => {
-//   try {
-//     const res = await axios.get(
-//       `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
-//     );
-//     callback(res.data.meals);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export const getMealsById = async (idMeal, callback) => {
+  try {
+    const res = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
+    );
+    callback(res.data.meals[0]);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getIngredients = async (callback) => {
   try {
