@@ -5,6 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'mobile': '320px',
+      'tablet': '480px',
+      'laptop': '769px',
+      'desktop': '1025px',
+      'large': '1201px'
+    },
     extend: {
       fontFamily: {
         'jost': ['Jost', 'sans-serif']
