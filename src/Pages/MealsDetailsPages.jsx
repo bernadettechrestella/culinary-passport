@@ -8,9 +8,7 @@ const MealsDetailsPages = () => {
 const {idMeal} = useParams()
 const [mealDetails, setMealsDetails] = useState([])
 const instructions = mealDetails?.strInstructions;
-const formattedInstructions = instructions ? instructions.split('. ').join('.\n') : '';
-
-console.log(formattedInstructions)
+const formattedInstructions = instructions ? instructions.replace(/\.\s/g, '.\n').replace(/(.{160})/g, '$1\n') : '';
 
 useEffect(() => {
     window.scrollTo(0, 0)
@@ -71,7 +69,7 @@ console.log(mealDetails)
             </div>
             <div className='text-center mt-10 pb-10'>
                 <p className='text-orange-500 text-3xl font-bold border-b-2 border-green-500 mb-2'>Instructions</p>
-                <pre className='font-jost text-xl max-w-[100%] overflow-auto'>{formattedInstructions}</pre>
+                <pre className='font-jost text-xl'>{formattedInstructions}</pre>
             </div>
         </div>
     </div>
