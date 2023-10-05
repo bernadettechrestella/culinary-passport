@@ -3,16 +3,21 @@ import Navbar from '../components/Navbar'
 import { Link } from 'react-scroll'
 import { useGetMeals } from '../hooks/useGetMeals'
 import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 const DashboardPages = () => {
     const {meals, getMealsByFirstLetter, ingredients} = useGetMeals()
     const [buttonActive, setButtonActive] = useState("m")
     const [startIndex, setStartIndex] = useState(0);
+    const navigate = useNavigate()
 
     const handleLetterClick = (letter) => {
         getMealsByFirstLetter(letter)
     }
 
+    const handleMealsClick = (idMeal) => {
+        navigate(`/meals/${idMeal}`)
+    }
 
         const handleClickNext = () => {
             setStartIndex(startIndex + 10)
@@ -25,24 +30,24 @@ const DashboardPages = () => {
   return (
     <div>
         <Navbar/>
-        <div className='w-full h-screen px-20'>
-            <div className='grid grid-cols-3 pt-44 pl-14'>
+        <div className='w-full h-screen laptop:px-20 px-10'>
+            <div className='grid laptop:grid-cols-3 grid-cols-2 laptop:pt-44 gap-2 pt-52'>
                 <div>
                     <img className='rounded-full' src="https://www.themealdb.com/images/media/meals/wurrux1468416624.jpg" />
                 </div>
-                <div className='col-span-2 font-extrabold text-7xl m-auto'>
+                <div className='laptop:col-span-2 font-extrabold text-5xl laptop:text-7xl m-auto'>
                     <p className='text-green-600'>Embark on a</p>
                     <p className='text-green-600'> Flavorful Journey</p>
                     <p className='text-orange-500'>with Culinary Passport!</p>
                     <Link to='recipes' smooth={true} duration={500}>
-                        <button className='text-2xl bg-green-300 text-orange-500 border-2 border-green-400 p-2 rounded-full font-semibold'>Explore Recipe</button>
+                        <button className='laptop:text-2xl text-xl mt-5 bg-green-300 text-orange-500 border-2 border-green-400 p-2 rounded-full font-semibold'>Explore Recipe</button>
                     </Link>
                 </div>
             </div>
         </div>
-        <div name='recipes' className='w-full min-h-screen px-20 py-10'>
+        <div name='recipes' className='w-full min-h-screen laptop:px-20 px-10 py-10'>
             <div className='text-center mb-10'>
-                <p className='text-5xl font-bold text-green-600'>Find Your
+                <p className='laptop:text-5xl text-4xl font-bold text-green-600'>Find Your
                     <span className='text-orange-500'> Perfect Meal</span>
                 </p>
             </div>
@@ -75,11 +80,11 @@ const DashboardPages = () => {
                 <button onClick={() => {handleLetterClick("z"); setButtonActive("z")}} className={`rounded-full ${buttonActive === "z" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>Z</button>
             </div>
             <div>
-                <div className='grid grid-cols-5 gap-3'>
+                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3'>
                     {Array.isArray(meals) && meals.slice(0,10).map((meal) => (
-                        <div key={meal.idMeal} className='relative'>
+                        <div key={meal.idMeal} className='relative cursor-pointer' onClick={() => handleMealsClick(meal.idMeal)}>
                             <img src={meal.strMealThumb} alt="" className='rounded-3xl'/>
-                            <p className='absolute bottom-0 left-0 right-0 px-4 py-2 bg-gray-500 bg-opacity-80 text-center rounded-b-3xl text-white text-lg'>{meal.strMeal}</p>
+                            <p className='absolute bottom-0 left-0 right-0 laptop:px-4 px-2 laptop:py-2 py-1 bg-gray-500 bg-opacity-80 text-center rounded-b-3xl text-white laptop:text-lg text-sm'>{meal.strMeal}</p>
                         </div>
                     ))}
                 </div>
@@ -87,17 +92,17 @@ const DashboardPages = () => {
         </div>
         <div name='ingredients' className='w-full min-h-screen py-10'>
             <div className='text-center mb-16 px-20'>
-                <p className='text-5xl font-bold text-orange-500'>Maximize Ingredients
+                <p className='laptop:text-5xl text-3xl font-bold text-orange-500'>Maximize Ingredients
                     <span className='text-green-600'> in Your Kitchen</span>
                 </p>
             </div>
             <div className='flex px-6'>
                 <BsFillArrowLeftCircleFill onClick={handleClickPrev} size={100} className='my-auto text-green-500 cursor-pointer'/>
-                <div className='grid grid-cols-5 gap-3 mx-4'>
+                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4'>
                     {Array.isArray(ingredients) && ingredients.slice(startIndex, startIndex + 10).map((ingredient) => (
                         <div key={ingredient.idIngredient} className='relative'>
                             <img src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`} alt="" className='rounded-3xl'/>
-                            <p className='absolute bottom-0 left-0 right-0 px-4 py-2 bg-gray-500 bg-opacity-80 text-center rounded-b-3xl text-white text-lg'>{ingredient.strIngredient}</p>
+                            <p className='absolute bottom-0 left-0 right-0 px-2 laptop:px-4 py-1 laptop:py-2 bg-gray-500 bg-opacity-80 text-center rounded-3xl text-white laptop:text-lg text-sm'>{ingredient.strIngredient}</p>
                         </div>
                     ))}
                 </div>
