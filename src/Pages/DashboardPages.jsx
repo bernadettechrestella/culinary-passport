@@ -56,7 +56,7 @@ const DashboardPages = () => {
     <div>
         <Navbar/>
         <div className='w-full h-screen laptop:px-20 px-10'>
-            <div className='grid laptop:grid-cols-3 grid-cols-2 laptop:pt-44 gap-2 pt-52'>
+            <div className='grid laptop:grid-cols-3 grid-cols-1 laptop:pt-44 gap-2 pt-36'>
                 <div>
                     <img className='rounded-full' src="https://www.themealdb.com/images/media/meals/wurrux1468416624.jpg" />
                 </div>
@@ -76,7 +76,7 @@ const DashboardPages = () => {
                     <span className='text-orange-500'> Perfect Meal</span>
                 </p>
             </div>
-            <div className='mb-10 flex gap-2 w-full justify-center text-center'>
+            <div className='mb-10 tablet:flex w-full justify-center text-center gap-2 hidden'>
                 <button onClick={() => {handleLetterClick("a"); setButtonActive("a")}} className={`rounded-full ${buttonActive === "a" ? 'bg-green-500 text-white' : 'bg-green-300 text-green-500'} font-semibold w-8 text-lg`}>A</button>
                 <button onClick={() => {handleLetterClick("b"); setButtonActive("b")}} className={`rounded-full ${buttonActive === "b" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>B</button>
                 <button onClick={() => {handleLetterClick("c"); setButtonActive("c")}} className={`rounded-full ${buttonActive === "c" ? 'bg-green-500 text-white' : 'bg-green-300 text-green-500'} font-semibold w-8 text-lg`}>C</button>
@@ -103,6 +103,38 @@ const DashboardPages = () => {
                 <button onClick={() => {handleLetterClick("x"); setButtonActive("x")}} className={`rounded-full ${buttonActive === "x" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>X</button>
                 <button onClick={() => {handleLetterClick("y"); setButtonActive("y")}} className={`rounded-full ${buttonActive === "y" ? 'bg-green-500 text-white' : 'bg-green-300 text-green-500'} font-semibold w-8 text-lg`}>Y</button>
                 <button onClick={() => {handleLetterClick("z"); setButtonActive("z")}} className={`rounded-full ${buttonActive === "z" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>Z</button>
+            </div>
+            <div className='flex gap-3 justify-center mb-5 tablet:hidden'>
+                <p className='my-auto text-orange-500 font-bold'>List all meal <span className='text-green-500'>by First Letter</span></p>
+                <select className='rounded-2xl border-2 border-orange-500 px-2 flex justify-center font-bold' defaultValue="M"
+                    onChange={(e) => {handleLetterClick(e.target.value)}}>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                </select>
             </div>
             <div className={`${meals != null ? 'flex px-6' : 'px-14'}`}>
                 {meals && meals.length > 10 ? <BsFillArrowLeftCircleFill onClick={handleClickPrevMeals} size={100} className='my-auto text-green-500 cursor-pointer'/> : null}
