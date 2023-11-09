@@ -32,3 +32,14 @@ export const getIngredients = async (callback) => {
     console.log(error);
   }
 };
+
+export const getMealsByIngredients = async (ingredients, callback) => {
+  try {
+    const res = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`
+    );
+    callback(res.data.meals);
+  } catch (error) {
+    console.log(error);
+  }
+};
