@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import MealsDetailsPages from './Pages/MealsDetailsPages';
+import ListMealsByIngredients from './Pages/ListMealsByIngredients.jsx'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/meals/:idMeal',
     element: <MealsDetailsPages />
+  },
+  {
+    path : '/mealsByIngredients/:strIngredient',
+    element: <ListMealsByIngredients />
   }
 ])
 
