@@ -20,6 +20,10 @@ const DashboardPages = () => {
         navigate(`/meals/${idMeal}`)
     }
 
+    const handleIngredientsClick = (strIngredient) => {
+        navigate(`/mealsByIngredients/${strIngredient}`)        
+    }
+
     const handleClickPrevIng = () => {
         if (startIndexIngredient === 0) {
             setStartIndexIngredient(ingredients.length - (ingredients.length % 10));
@@ -148,7 +152,7 @@ const DashboardPages = () => {
                         ))}
                     </div>
                 }
-                {meals && meals.length > 10 ? <BsFillArrowRightCircleFill onClick={handleClickPrevMeals} size={100} className='my-auto text-orange-500 cursor-pointer'/> : null}
+                {meals && meals.length > 10 ? <BsFillArrowRightCircleFill onClick={handleClickNextMeals} size={100} className='my-auto text-orange-500 cursor-pointer'/> : null}
             </div>
         </div>
         <div name='ingredients' className='w-full min-h-screen py-10'>
@@ -161,7 +165,7 @@ const DashboardPages = () => {
                 <BsFillArrowLeftCircleFill onClick={handleClickPrevIng} size={100} className='my-auto text-green-500 cursor-pointer'/>
                 <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4'>
                     {Array.isArray(ingredients) && ingredients.slice(startIndexIngredient, startIndexIngredient + 10).map((ingredient) => (
-                        <div key={ingredient.idIngredient} className='relative'>
+                        <div key={ingredient.idIngredient} className='relative' onClick={() => handleIngredientsClick(ingredient.strIngredient)}>
                             <img src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`} alt="" className='rounded-3xl'/>
                             <p className='absolute bottom-0 left-0 right-0 px-2 laptop:px-4 py-1 laptop:py-2 bg-gray-500 bg-opacity-80 text-center rounded-3xl text-white laptop:text-lg text-sm'>{ingredient.strIngredient}</p>
                         </div>
