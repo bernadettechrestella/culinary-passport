@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useGetMeals } from '../hooks/useGetMeals'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getMealsById } from '../services/meals.services'
 import Navbar from '../components/Navbar'
 
@@ -9,6 +9,7 @@ const {idMeal} = useParams()
 const [mealDetails, setMealsDetails] = useState([])
 const instructions = mealDetails?.strInstructions;
 const formattedInstructions = instructions ? instructions.replace(/\.\s/g, '.\n').replace(/(.{160})/g, '$1\n') : '';
+const navigate = useNavigate()
 
 useEffect(() => {
     window.scrollTo(0, 0)
@@ -36,7 +37,7 @@ console.log(mealDetails)
                             return (
                                 <div key={i} className='flex gap-2 justify-end'>
                                         <p className='text-xl my-auto'>{measure} {ingredient}</p>
-                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12' />
+                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
                                 </div>
                             )
                         }
@@ -57,7 +58,7 @@ console.log(mealDetails)
                             if ((i + 1) % 2 === 0) {
                             return (
                                 <div key={i} className='flex gap-2 justify-start'>
-                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12'/>
+                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
                                     <p className='text-xl my-auto'>{measure} {ingredient}</p>
                                 </div>
                             )
@@ -67,7 +68,11 @@ console.log(mealDetails)
                     })}
                 </div>
             </div>
-            <div className='text-center mt-10 pb-10'>
+            <div className='flex justify-center pt-3 text-center gap-3'>
+                <button className='bg-orange-500 text-white p-1 rounded'>{mealDetails.strArea} Food</button>
+                <button className='bg-green-500 text-white p-1 rounded'>{mealDetails.strCategory} Category</button>
+            </div>
+            <div className='text-center mt-5 pb-10'>
                 <p className='text-orange-500 text-3xl font-bold border-b-2 border-green-500 mb-2'>Instructions</p>
                 <pre className='font-jost text-xl'>{formattedInstructions}</pre>
             </div>
