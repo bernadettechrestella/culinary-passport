@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getMealsByIngredients } from '../services/meals.services'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useGetMeals } from '../hooks/useGetMeals'
 import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs'
@@ -14,6 +14,8 @@ const ListMealsByIngredients = () => {
     
     const [meals, setMeals] = useState([])
     const [startIndexMeals, setStartIndexMeals] = useState(0);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (ingredients.length > 0) {
@@ -40,6 +42,14 @@ const ListMealsByIngredients = () => {
         }
     }
 
+    const handleIngredientsClick = (strIngredient) => {
+        navigate(`/mealsByIngredients/${strIngredient}`)
+    }
+
+    const handleMealsClick = (idMeal) => {
+        navigate(`/meals/${idMeal}`)
+    }
+
   return (
     <div>
         <Navbar />
@@ -54,22 +64,22 @@ const ListMealsByIngredients = () => {
                             <div className='text-center tablet:mt-3'>
                                 <p className='tablet:text-xl text-base font-semibold text-orange-500 tablet:pb-3 pb-1'>Other <span className='text-green-500'>ingredients</span></p>
                                 <select className='border-2 border-orange-500 rounded-2xl text-green-500 font-semibold tablet:text-xl tablet:p-3 text-base p-1'
-                                    defaultValue={filteredIngredients[0].strIngredient}>
+                                    defaultValue={filteredIngredients[0].strIngredient} onChange={(e) => handleIngredientsClick(e.target.value)}>
                                     {ingredients.map(ingredient => (
-                                        <option value={ingredient.strIngredient}>{ingredient.strIngredient}</option>
+                                        <option key={ingredient.idIngredient} value={ingredient.strIngredient}>{ingredient.strIngredient}</option>
                                     ))}
                                 </select>
                             </div>
                         </div>
                     ) : (
-                    <p>No Result Found</p>
+                    <p>Loading assets...</p>
                     )}
                 </div>
                 <div className='col-span-2'>
                     <div className='tablet:text-2xl text-lg mt-2 tablet-mt-0 text-center tablet:text-left font-bold text-orange-500 pl-3 tablet:mb-5 mb-2'>Meals based on <span className='text-green-500'>{strIngredient}</span> ingredient</div>
                     <div className='grid laptop:grid-cols-3 tablet:grid-cols-2 grid-cols-2 tablet:gap-3 gap-2 mx-4'>
                         {Array.isArray(meals) && meals.slice(startIndexMeals, startIndexMeals + 6).map((meal) => (
-                            <div key={meal.idMeal} className='relative'>
+                            <div key={meal.idMeal} className='relative cursor-pointer' onClick={() => handleMealsClick(meal.idMeal)}>
                                 <img src={meal.strMealThumb} alt={meal.strMeal} className='rounded-3xl'/>
                                 <p className='absolute bottom-0 left-0 right-0 px-2 laptop:px-4 py-1 laptop:py-2 bg-gray-500 bg-opacity-80 text-center rounded-3xl text-white laptop:text-lg text-sm'>
                                     {meal.strMeal}
