@@ -59,7 +59,7 @@ const ListMealsByIngredients = () => {
                     {filteredIngredients.length > 0 ? (
                         <div>
                             <h1 className='text-center tablet:text-4xl text-2xl font-bold text-green-500 tablet:mb-5'>{filteredIngredients[0].strIngredient}</h1>
-                            <img src={`https://www.themealdb.com/images/ingredients/${filteredIngredients[0].strIngredient}.png`} alt="" className='w-[50%] h-auto mx-auto tablet:w-full'/>
+                            <img src={`https://www.themealdb.com/images/ingredients/${filteredIngredients[0].strIngredient.replace(/ /g, "%20")}.png`} alt="" className='w-[50%] h-auto mx-auto tablet:w-full'/>
                             {/* <p>{filteredIngredients[0].strDescription}</p> */}
                             <div className='text-center tablet:mt-3'>
                                 <p className='tablet:text-xl text-base font-semibold text-orange-500 tablet:pb-3 pb-1'>Other <span className='text-green-500'>ingredients</span></p>
@@ -87,7 +87,7 @@ const ListMealsByIngredients = () => {
                             </div>
                         ))}
                     </div>
-                    <div className='flex gap-3 justify-end mt-3 mr-3'>
+                    <div className='flex gap-3 justify-end my-3 mr-3'>
                         {meals && meals.length > 8 ? <BsFillArrowLeftCircleFill onClick={handleClickPrevMeals} size={30} className='text-orange-500 cursor-pointer'/> : null}
                         {meals && meals.length > 8 ? <BsFillArrowRightCircleFill onClick={handleClickNextMeals} size={30} className='text-green-500 cursor-pointer'/> : null}
                     </div>
