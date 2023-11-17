@@ -75,8 +75,8 @@ const DashboardPages = () => {
             </div>
         </div>
         <div name='recipes' className='w-full min-h-screen py-10'>
-            <div className='text-center mb-10 laptop:px-20 px-10 '>
-                <p className='laptop:text-5xl text-4xl font-bold text-green-600'>Find Your
+            <div className='text-center tablet:mb-10 laptop:px-20 px-5 mb-3'>
+                <p className='laptop:text-5xl text-3xl font-bold text-green-600'>Find Your
                     <span className='text-orange-500'> Perfect Meal</span>
                 </p>
             </div>
@@ -156,7 +156,7 @@ const DashboardPages = () => {
             </div>
         </div>
         <div name='ingredients' className='w-full min-h-screen py-10'>
-            <div className='text-center mb-16 px-20'>
+            <div className='text-center laptop:mb-16 mb-3 laptop:px-20 px-10'>
                 <p className='laptop:text-5xl text-3xl font-bold text-orange-500'>Maximize Ingredients
                     <span className='text-green-600'> in Your Kitchen</span>
                 </p>
