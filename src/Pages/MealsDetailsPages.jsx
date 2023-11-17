@@ -36,9 +36,9 @@ console.log(mealDetails)
                         if (ingredient && measure) {
                             if ((i + 1) % 2 === 1) {
                             return (
-                                <div key={i} className='flex gap-2 justify-end'>
+                                <div key={i} className='flex gap-2 justify-end pb-1'>
                                         <p className='text-xl my-auto'>{measure} {ingredient}</p>
-                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
+                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient.replace(/ /g, '%20')}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
                                 </div>
                             )
                         }
@@ -58,8 +58,8 @@ console.log(mealDetails)
                         if (ingredient && measure) {
                             if ((i + 1) % 2 === 0) {
                             return (
-                                <div key={i} className='flex gap-2 justify-start'>
-                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
+                                <div key={i} className='flex gap-2 justify-start pb-1'>
+                                    <img src={`https://www.themealdb.com/images/ingredients/${ingredient.replace(/ /g, '%20')}-Small.png`} alt="" className='w-12 cursor-pointer' onClick={() => navigate(`/mealsByIngredients/${ingredient}`)}/>
                                     <p className='text-xl my-auto'>{measure} {ingredient}</p>
                                 </div>
                             )
