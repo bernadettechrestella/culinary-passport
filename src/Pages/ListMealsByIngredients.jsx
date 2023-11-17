@@ -53,7 +53,7 @@ const ListMealsByIngredients = () => {
   return (
     <div>
         <Navbar />
-        <div className='w-full h-screen laptop:px-20 px-10 pt-20'>
+        <div className='w-full h-screen laptop:px-20 px-10 laptop:pt-20 pt-16'>
             <div className='tablet:grid tablet:grid-cols-3 tablet:gap-5'>
                 <div className='col-span-1'>
                     {filteredIngredients.length > 0 ? (
