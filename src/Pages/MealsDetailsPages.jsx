@@ -90,8 +90,9 @@ console.log(mealDetails)
                 </div>
             </div>
             <div className='flex justify-center pt-3 text-center gap-3'>
-                <button className='bg-orange-500 text-white p-1 rounded'>{mealDetails.strArea} Food</button>
-                <button className='bg-green-500 text-white p-1 rounded'>{mealDetails.strCategory} Category</button>
+                <button className='bg-orange-500 text-white p-1 rounded' disabled>{mealDetails.strArea} Food</button>
+                <button className='bg-green-500 text-white p-1 rounded'
+                    onClick={() => navigate(`/mealsByCategories/${mealDetails.strCategory}`)}>{mealDetails.strCategory} Category</button>
             </div>
             <div className='text-center mt-5 pb-10'>
                 <p className='text-orange-500 text-3xl font-bold border-b-2 border-green-500 mb-2'>Instructions</p>
