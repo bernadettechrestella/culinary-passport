@@ -46,7 +46,7 @@ const Navbar = () => {
                   <ScrollLink to='categories' smooth={true} duration={500}>
                     <p className='text-green-500'>Categories</p>
                   </ScrollLink>
-                    <p className='text-orange-500'>Countries</p>
+                    {/* <p className='text-orange-500'>Countries</p> */}
                 </>
               )}
             </div>
@@ -80,7 +80,7 @@ const Navbar = () => {
                   <ScrollLink to='categories' smooth={true} duration={500}>
                     <p className='text-green-500' onClick={handleClose}>Categories</p>
                   </ScrollLink>
-                    <p className='text-orange-500' onClick={handleClose}>Countries</p>
+                    {/* <p className='text-orange-500' onClick={handleClose}>Countries</p> */}
             </div>
         </div>
     </header>
