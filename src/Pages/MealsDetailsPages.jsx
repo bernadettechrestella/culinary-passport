@@ -24,7 +24,7 @@ console.log(mealDetails)
   return (
     <div>
         <Navbar />
-        <div className='w-full h-screen laptop:px-20 px-10 pt-20'>
+        <div className='w-full h-screen laptop:px-20 px-10 tablet:pt-20 pt-14'>
             <div className='laptop:mb-8 mb-4'>
                 <p className='laptop:text-5xl text-3xl font-bold text-green-600 text-center mb-2'>{mealDetails.strMeal}</p>
             </div>
