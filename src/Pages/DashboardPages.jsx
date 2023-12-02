@@ -74,7 +74,7 @@ const DashboardPages = () => {
                 </div>
             </div>
         </div>
-        <div name='recipes' className='w-full min-h-screen py-8'>
+        <div name='recipes' className='w-full min-h-screen py-4 tablet:py-8'>
             <div className='text-center tablet:mb-10 laptop:px-20 px-5 mb-2 pt-10'>
                 <p className='laptop:text-5xl text-3xl font-bold text-green-600'>Find Your
                     <span className='text-orange-500'> Perfect Meal</span>
@@ -108,7 +108,7 @@ const DashboardPages = () => {
                 <button onClick={() => {handleLetterClick("y"); setButtonActive("y")}} className={`rounded-full ${buttonActive === "y" ? 'bg-green-500 text-white' : 'bg-green-300 text-green-500'} font-semibold w-8 text-lg`}>Y</button>
                 <button onClick={() => {handleLetterClick("z"); setButtonActive("z")}} className={`rounded-full ${buttonActive === "z" ? 'bg-orange-500 text-white' : 'bg-orange-300 text-orange-500'} font-semibold w-8 text-lg`}>Z</button>
             </div>
-            <div className='flex gap-3 justify-center mb-5 tablet:hidden'>
+            <div className='flex gap-3 justify-center mb-3 tablet:hidden'>
                 <p className='my-auto text-orange-500 font-bold'>List all meal <span className='text-green-500'>by First Letter</span></p>
                 <select className='rounded-2xl border-2 border-orange-500 px-2 flex justify-center font-bold' defaultValue="M"
                     onChange={(e) => {handleLetterClick(e.target.value)}}>
@@ -155,8 +155,8 @@ const DashboardPages = () => {
                 {meals && meals.length > 10 ? <BsFillArrowRightCircleFill onClick={handleClickNextMeals} size={100} className='my-auto text-orange-500 cursor-pointer'/> : null}
             </div>
         </div>
-        <div name='ingredients' className='w-full min-h-screen py-8'>
-            <div className='text-center laptop:mb-16 mb-3 laptop:px-20 px-10 pt-14'>
+        <div name='ingredients' className='w-full min-h-screen tablet:py-8'>
+            <div className='text-center laptop:mb-16 mb-1 laptop:px-20 px-10 pt-14'>
                 <p className='laptop:text-5xl text-3xl font-bold text-orange-500'>Maximize Ingredients
                     <span className='text-green-600'> in Your Kitchen</span>
                 </p>
