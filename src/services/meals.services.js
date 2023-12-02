@@ -43,3 +43,25 @@ export const getMealsByIngredients = async (ingredients, callback) => {
     console.log(error);
   }
 };
+
+export const getCategories = async (callback) => {
+  try {
+    const res = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/categories.php`
+    );
+    callback(res.data.categories);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMealsByCategories = async (categories, callback) => {
+  try {
+    const res = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categories}`
+    );
+    callback(res.data.meals);
+  } catch (error) {
+    console.log(error);
+  }
+};
