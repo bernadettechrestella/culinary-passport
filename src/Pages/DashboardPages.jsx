@@ -6,7 +6,7 @@ import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-ico
 import { useNavigate } from 'react-router-dom'
 
 const DashboardPages = () => {
-    const {meals, getMealsByFirstLetter, ingredients} = useGetMeals()
+    const {meals, getMealsByFirstLetter, ingredients, categories} = useGetMeals()
     const [buttonActive, setButtonActive] = useState("m")
     const [startIndexIngredient, setStartIndexIngredient] = useState(0);
     const [startIndexMeals, setStartIndexMeals] = useState(0);
@@ -22,6 +22,10 @@ const DashboardPages = () => {
 
     const handleIngredientsClick = (strIngredient) => {
         navigate(`/mealsByIngredients/${strIngredient}`)        
+    }
+
+    const handleCategoriesClick = (strCategory) => {
+        navigate(`/mealsByCategories/${strCategory}`)
     }
 
     const handleClickPrevIng = () => {
@@ -65,8 +69,8 @@ const DashboardPages = () => {
                     <img className='rounded-full' src="https://www.themealdb.com/images/media/meals/wurrux1468416624.jpg" />
                 </div>
                 <div className='laptop:col-span-2 font-extrabold text-5xl laptop:text-7xl m-auto'>
-                    <p className='text-green-600'>Embark on a</p>
-                    <p className='text-green-600'> Flavorful Journey</p>
+                    <p className='text-green-500'>Embark on a</p>
+                    <p className='text-green-500'> Flavorful Journey</p>
                     <p className='text-orange-500'>with Culinary Passport!</p>
                     <Link to='recipes' smooth={true} duration={500}>
                         <button className='laptop:text-2xl text-xl mt-5 bg-green-300 text-orange-500 border-2 border-green-400 p-2 rounded-full font-semibold'>Explore Recipe</button>
@@ -76,7 +80,7 @@ const DashboardPages = () => {
         </div>
         <div name='recipes' className='w-full min-h-screen py-4 tablet:py-8'>
             <div className='text-center tablet:mb-10 laptop:px-20 px-5 mb-2 pt-10'>
-                <p className='laptop:text-5xl text-3xl font-bold text-green-600'>Find Your
+                <p className='laptop:text-5xl text-3xl font-bold text-green-500'>Find Your
                     <span className='text-orange-500'> Perfect Meal</span>
                 </p>
             </div>
@@ -158,12 +162,12 @@ const DashboardPages = () => {
         <div name='ingredients' className='w-full min-h-screen tablet:py-8'>
             <div className='text-center laptop:mb-16 mb-1 laptop:px-20 px-10 pt-14'>
                 <p className='laptop:text-5xl text-3xl font-bold text-orange-500'>Maximize Ingredients
-                    <span className='text-green-600'> in Your Kitchen</span>
+                    <span className='text-green-500'> in Your Kitchen</span>
                 </p>
             </div>
             <div className='flex px-6'>
                 <BsFillArrowLeftCircleFill onClick={handleClickPrevIng} size={100} className='my-auto text-green-500 cursor-pointer'/>
-                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4'>
+                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4 cursor-pointer'>
                     {Array.isArray(ingredients) && ingredients.slice(startIndexIngredient, startIndexIngredient + 10).map((ingredient) => (
                         <div key={ingredient.idIngredient} className='relative' onClick={() => handleIngredientsClick(ingredient.strIngredient)}>
                             <img src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`} alt="" className='rounded-3xl'/>
@@ -172,6 +176,23 @@ const DashboardPages = () => {
                     ))}
                 </div>
                 <BsFillArrowRightCircleFill onClick={handleClickNextIng} size={100} className='my-auto text-orange-500 cursor-pointer'/>
+            </div>
+        </div>
+        <div name='categories' className='w-full min-h-screen tablet:py-8'>
+            <div className="text-center laptop:mb-16 mb-1 laptop:px-20 px-10 pt-14">
+                <p className="laptop:text-5xl text-3xl font-bold text-green-500">Explore
+                    <span className="text-orange-500"> Categories</span>
+                </p>
+            </div>
+            <div className='flex px-6'>
+                <div className='grid laptop:grid-cols-5 tablet:grid-cols-4 grid-cols-2 gap-3 mx-4 cursor-pointer'>
+                    {categories.map((category) => (
+                        <div key={category.idCategory} className='relative' onClick={() => handleCategoriesClick(category.strCategory)}>
+                            <img src={`https://www.themealdb.com/images/category/${category.strCategory}.png`} alt="" className='rounded-3xl'/>
+                            <p className='absolute bottom-0 left-0 right-0 px-2 laptop:px-4 py-1 laptop:py-2 bg-gray-500 bg-opacity-80 text-center rounded-3xl text-white laptop:text-lg text-sm'>{category.strCategory}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     </div>
