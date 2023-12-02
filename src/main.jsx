@@ -5,6 +5,7 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import MealsDetailsPages from './Pages/MealsDetailsPages';
 import ListMealsByIngredients from './Pages/ListMealsByIngredients.jsx'
+import ListMealsByCategories from './Pages/ListMealsByCategories.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path : '/mealsByIngredients/:strIngredient',
     element: <ListMealsByIngredients />
+  },
+  {
+    path : '/mealsByCategories/:strCategory',
+    element: <ListMealsByCategories />
   }
 ])
 
